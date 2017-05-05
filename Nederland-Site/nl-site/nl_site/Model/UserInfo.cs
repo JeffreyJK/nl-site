@@ -13,7 +13,7 @@ namespace nl_site.Model
         public string last_name;
         public string status;
         public string profile_img;
-        public string create_at;
+        public string created_at;
         public int rank;
         public int active;
     }
