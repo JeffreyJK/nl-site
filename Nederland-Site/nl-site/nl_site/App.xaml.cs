@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 
 using Xamarin.Forms;
@@ -13,13 +14,13 @@ namespace nl_site
 		{
 			InitializeComponent();
 
-			MainPage = new nl_site.MainPage();
+            MainPage = new nl_site.LoginPage();
 		}
 
 		protected override void OnStart ()
 		{
-			// Handle when your app starts
-		}
+            // Handle when your app starts
+        }
 
 		protected override void OnSleep ()
 		{

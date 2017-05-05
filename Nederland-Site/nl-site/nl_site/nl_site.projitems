@@ -12,9 +12,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)ApiClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LoginPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Model\ClientOutput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Login.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Register.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\UserInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage.xaml">
