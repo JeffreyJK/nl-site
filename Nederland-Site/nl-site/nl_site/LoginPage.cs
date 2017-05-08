@@ -11,8 +11,12 @@ namespace nl_site
     public class LoginPage : ContentPage
 	{
         private Entry _emailInput;
+        private Label _emailText;
         private Entry _passwordInput;
         private Button _loginButton;
+        private Label _register;
+
+        bool disable = false;
 
         public LoginPage()
         {
@@ -26,6 +30,7 @@ namespace nl_site
                 }
             };
 
+            // grid aanmaken
             var loginGrid = new Grid { RowSpacing = 1, ColumnSpacing = 1 };
 
             loginGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
@@ -44,22 +49,28 @@ namespace nl_site
             loginGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             loginGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
 
-            // create email entry for join game menu
+            // email veld aanmaken
             _emailInput = new Entry
              {
                  Placeholder = "Email",
                  TextColor = Color.Black
              };
 
-             // create password entry for join game menu
-             _passwordInput = new Entry
+            _emailText = new Label
+            {
+                Text = "@nederland-site.nl",
+                TextColor = Color.Black
+            };
+
+            // wachtwoord veld aanmaken
+            _passwordInput = new Entry
              {
                  Placeholder = "Wachtwoord",
                  TextColor = Color.Black,
                  IsPassword = true
              };
 
-             // create join button for join game menu
+             // login knop aanmaken
              _loginButton = new Button
              {
                  Text = "Login",
@@ -67,27 +78,56 @@ namespace nl_site
                  Style = buttonStyle
              };
 
+            _register = new Label
+            {
+                Text = "Maak een nieuw account aan",
+                TextColor = Color.Black
+            };
+
             _loginButton.Clicked += _loginButton_Clicked;
 
             loginGrid.Children.Add(_emailInput, 1, 2);
+            loginGrid.Children.Add(_emailText, 4, 2);
             loginGrid.Children.Add(_passwordInput, 1, 3);
             loginGrid.Children.Add(_loginButton, 1, 5);
+            loginGrid.Children.Add(_register, 1, 6);
 
-            Grid.SetColumnSpan(_emailInput, 5);
+            Grid.SetColumnSpan(_emailInput, 3);
+            Grid.SetColumnSpan(_emailText, 3);
             Grid.SetColumnSpan(_passwordInput, 5);
             Grid.SetColumnSpan(_loginButton, 5);
+            Grid.SetColumnSpan(_register, 5);
 
-            // place elements on page
+            // plaats content op de pagina
             Content = loginGrid;
+
+            var _register_tap = new TapGestureRecognizer();
+            _register_tap.Tapped += async (s, e) =>
+            {
+                if (disable)
+                    return;
+
+                disable = true;
+
+                await Navigation.PushModalAsync(new RegisterPage());
+
+                disable = false;
+            };
+            _register.GestureRecognizers.Add(_register_tap);
 
         }
 
-        string emailRegex = @"^([A-Z|a-z|0-9](\.|_){0,1})+[A-Z|a-z|0-9]\@([A-Z|a-z|0-9])+((\.){0,1}[A-Z|a-z|0-9]){2}\.[a-z]{2,3}$";
+        string emailRegex = @"^[a-z0-9]+[_a-z0-9\.-]*[a-z0-9]";
 
         private async void _loginButton_Clicked(object sender, EventArgs e)
         {
+            if (disable)
+                return;
+
+            disable = true;
+
             List<string> errorMsg = new List<string>();
-            // email adres
+            // email adres controle
             if (!string.IsNullOrEmpty(_emailInput.Text))
             {
                 Match result = Regex.Match(_emailInput.Text.Trim(), emailRegex);
@@ -100,7 +140,7 @@ namespace nl_site
             {
                 errorMsg.Add("Vul een email in");
             }
-            // wachtwoord
+            // wachtwoord controle
             if (!string.IsNullOrEmpty(_passwordInput.Text))
             {
                 if (_passwordInput.Text.Trim().Length < 4)
@@ -115,9 +155,10 @@ namespace nl_site
 
             if (errorMsg.Count() == 0)
             {
-                // Login
+                // login
+                string completeEmail = _emailInput.Text + _emailText.Text;
                 ApiClient client = new ApiClient();
-                ClientOutput output = await client.loginUserData(_emailInput.Text, _passwordInput.Text);
+                ClientOutput output = await client.loginUserData(completeEmail, _passwordInput.Text);
                 if (output.errorCode == 0)
                 {
                     UserInfo userInfo = (UserInfo)JsonConvert.DeserializeObject(output.Content, typeof(UserInfo));
@@ -126,17 +167,21 @@ namespace nl_site
                 }
                 else
                 {
+                    disable = false;
+                    _passwordInput.Text = string.Empty;
                     await DisplayAlert("Let op!", output.Content, "OK");
                 }
             }
             else
             {
-                // log errors
+                // log errors en laten weergeven
                 string errorString = "";
                 foreach (string value in errorMsg)
                 {
                     errorString += value + "\n";
                 }
+                disable = false;
+                _passwordInput.Text = string.Empty;
                 await DisplayAlert("Let op!", errorString, "OK");
             }
         }

@@ -21,6 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\Login.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Register.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\UserInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RegisterPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage.xaml">
