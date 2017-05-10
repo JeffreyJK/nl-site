@@ -22,8 +22,6 @@ namespace nl_site
             return connection;
         }
 
-
-
         public async Task<ClientOutput> loginUserData(string Email, string Password)
         {
             UserInfo userInfo = new UserInfo();
@@ -49,8 +47,7 @@ namespace nl_site
                 };
                 return o;
             }
-
-
+            
             if (response.IsSuccessStatusCode)
             {
                 String s = await response.Content.ReadAsStringAsync();
@@ -107,7 +104,6 @@ namespace nl_site
                 return o;
             }
 
-
             if (response.IsSuccessStatusCode)
             {
                 String s = await response.Content.ReadAsStringAsync();
@@ -137,5 +133,6 @@ namespace nl_site
                 return o;
             }
         }
+
     }
 }

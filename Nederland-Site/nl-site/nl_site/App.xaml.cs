@@ -10,12 +10,25 @@ namespace nl_site
 {
 	public partial class App : Application
 	{
-		public App ()
+        public static string AppName { get { return "Nederland-Site"; } }
+
+        public App ()
 		{
 			InitializeComponent();
 
-            MainPage = new nl_site.LoginPage();
-		}
+            if (DependencyService.Get<ICredentialsService>().DoCredentialsExist())
+            {
+                MainPage = new NavigationPage(new HomePage())
+                {
+                    BarBackgroundColor = Color.FromHex("#ff5300"),
+                    BarTextColor = Color.White
+                };
+            }
+            else
+            {
+                MainPage = new NavigationPage(new LoginPage());
+            }
+        }
 
 		protected override void OnStart ()
 		{

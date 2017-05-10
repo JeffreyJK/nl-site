@@ -15,11 +15,13 @@ namespace nl_site
         private Entry _passwordInput;
         private Button _loginButton;
         private Label _register;
-
+        ICredentialsService storeService;
         bool disable = false;
 
         public LoginPage()
         {
+            storeService = DependencyService.Get<ICredentialsService>();
+
             var buttonStyle = new Style(typeof(Button))
             {
                 Setters = {
@@ -109,7 +111,8 @@ namespace nl_site
 
                 disable = true;
 
-                await Navigation.PushModalAsync(new RegisterPage());
+                Navigation.InsertPageBefore(new RegisterPage(), this);
+                await Navigation.PopAsync();
 
                 disable = false;
             };
@@ -162,8 +165,15 @@ namespace nl_site
                 if (output.errorCode == 0)
                 {
                     UserInfo userInfo = (UserInfo)JsonConvert.DeserializeObject(output.Content, typeof(UserInfo));
-                    
-                    await Navigation.PushModalAsync(new MainPage());
+
+                    bool doCredentialsExist = storeService.DoCredentialsExist();
+                    if (!doCredentialsExist)
+                    {
+                        storeService.SaveCredentials(completeEmail, _passwordInput.Text);
+                    }
+
+                    Navigation.InsertPageBefore(new HomePage(), this);
+                    await Navigation.PopAsync();
                 }
                 else
                 {

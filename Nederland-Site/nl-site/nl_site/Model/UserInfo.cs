@@ -6,7 +6,7 @@ namespace nl_site.Model
 {
     class UserInfo
     {
-        public int user_id;
+        public int id;
         public string email;
         public string password;
         public string first_name;

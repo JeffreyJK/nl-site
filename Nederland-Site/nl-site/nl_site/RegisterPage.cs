@@ -118,7 +118,8 @@ namespace nl_site
 
                 disable = true;
 
-                await Navigation.PushModalAsync(new LoginPage());
+                Navigation.InsertPageBefore(new LoginPage(), this);
+                await Navigation.PopAsync();
 
                 disable = false;
             };
@@ -163,8 +164,8 @@ namespace nl_site
                 ClientOutput output = await client.registerData(completeEmail, _firstInput.Text, _lastInput.Text);
                 if (output.errorCode == 0)
                 {
-
-                    await Navigation.PushModalAsync(new LoginPage());
+                    Navigation.InsertPageBefore(new LoginPage(), this);
+                    await Navigation.PopAsync();
                 }
                 else
                 {
