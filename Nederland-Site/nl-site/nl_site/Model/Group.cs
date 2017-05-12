@@ -4,9 +4,8 @@ using System.Text;
 
 namespace nl_site.Model
 {
-    class ClientOutput
+    class Group
     {
-        public int errorCode { get; set; }
-        public string Content { get; set; }
+        public string email { get; set; }
     }
 }

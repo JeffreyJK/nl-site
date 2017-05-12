@@ -41,7 +41,20 @@ namespace nl_site.Droid
                 AccountStore.Create(Forms.Context).Save(account, App.AppName);
             }
         }
-
+        /*
+        public void GetCredentials()
+        {
+            if (!string.IsNullOrWhiteSpace(userName) && !string.IsNullOrWhiteSpace(password))
+            {
+                Account account = new Account
+                {
+                    Username = userName
+                };
+                account.Properties.Add("Password", password);
+                AccountStore.Create(Forms.Context).Save(account, App.AppName);
+            }
+        }
+        */
         public void DeleteCredentials()
         {
             var account = AccountStore.Create(Forms.Context).FindAccountsForService(App.AppName).FirstOrDefault();

@@ -134,5 +134,34 @@ namespace nl_site
             }
         }
 
+        public async Task<string> getGroup(string Email)
+        {
+            HttpClient client = connectToServer();
+            Group GroupInfo = new Group
+            {
+                email = Email
+            };
+            String str = JsonConvert.SerializeObject(GroupInfo);
+            HttpResponseMessage response;
+            
+            try
+            {
+                response = await client.PostAsync("chatlist", new StringContent(str));
+
+                if (response.IsSuccessStatusCode)
+                {
+                    String s = await response.Content.ReadAsStringAsync();
+
+                    return s;
+                }
+            }
+            catch (Exception p)
+            {
+                throw new Exception(p.ToString());
+
+            }
+            return null;
+        }
+
     }
 }

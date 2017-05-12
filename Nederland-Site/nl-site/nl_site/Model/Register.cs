@@ -4,10 +4,10 @@ using System.Text;
 
 namespace nl_site.Model
 {
-    class Register
+    public class Register
     {
-        public string email;
-        public string first_name;
-        public string last_name;
+        public string email { get; set; }
+        public string first_name { get; set; }
+        public string last_name { get; set; }
     }
 }

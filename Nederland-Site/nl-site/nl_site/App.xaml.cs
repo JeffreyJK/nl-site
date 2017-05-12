@@ -12,6 +12,8 @@ namespace nl_site
 	{
         public static string AppName { get { return "Nederland-Site"; } }
 
+        internal static string Clijst;
+
         public App ()
 		{
 			InitializeComponent();

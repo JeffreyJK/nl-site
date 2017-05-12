@@ -4,9 +4,9 @@ using System.Text;
 
 namespace nl_site.Model
 {
-    class Login
+    public class Login
     {
-        public string email;
-        public string password;
+        public string email { get; set; }
+        public string password { get; set; }
     }
 }
