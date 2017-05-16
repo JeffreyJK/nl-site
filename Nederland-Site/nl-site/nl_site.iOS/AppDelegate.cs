@@ -23,7 +23,7 @@ namespace nl_site.iOS
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
 			global::Xamarin.Forms.Forms.Init ();
-			LoadApplication (new nl_site.App ());
+            LoadApplication (new nl_site.App ());
 
 			return base.FinishedLaunching (app, options);
 		}

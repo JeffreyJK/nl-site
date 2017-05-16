@@ -22,7 +22,7 @@ namespace nl_site
             {
                 MainPage = new NavigationPage(new HomePage())
                 {
-                    BarBackgroundColor = Color.FromHex("#ff5300"),
+                    BarBackgroundColor = Color.FromHex("#ee4622"),
                     BarTextColor = Color.White
                 };
             }

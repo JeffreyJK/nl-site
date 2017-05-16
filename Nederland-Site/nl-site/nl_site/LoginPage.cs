@@ -10,17 +10,27 @@ namespace nl_site
 {
     public class LoginPage : ContentPage
 	{
+
         private Entry _emailInput;
         private Label _emailText;
         private Entry _passwordInput;
         private Button _loginButton;
         private Label _register;
+        private Image _logo;
+        private Image _background;
+        private CustomBoxView _emailBack;
+        private CustomBoxView _passBack;
+        private CustomBoxView _emailTextBack1;
+        private CustomBoxView _emailTextBack2;
+
         ICredentialsService storeService;
         bool disable = false;
 
         public LoginPage()
         {
             storeService = DependencyService.Get<ICredentialsService>();
+
+            NavigationPage.SetHasNavigationBar(this, false);
 
             var buttonStyle = new Style(typeof(Button))
             {
@@ -32,48 +42,79 @@ namespace nl_site
                 }
             };
 
-            // grid aanmaken
-            var loginGrid = new Grid { RowSpacing = 1, ColumnSpacing = 1 };
+            _logo = new Image
+            {
+                Source = "Icon.png",
+                WidthRequest = 175,
+                HeightRequest = 175,
+                MinimumHeightRequest = 175,
+                MinimumWidthRequest = 175,
+                VerticalOptions = LayoutOptions.End,
+                HorizontalOptions = LayoutOptions.End,
+                Aspect = Aspect.AspectFit 
+            };
 
-            loginGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            loginGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            loginGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            loginGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            loginGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            loginGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            loginGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-
-            loginGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            loginGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            loginGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            loginGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            loginGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            loginGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            loginGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            _background = new Image
+            {
+                Source = "background.png",
+                Aspect = Aspect.AspectFill
+            };
 
             // email veld aanmaken
             _emailInput = new Entry
              {
                  Placeholder = "Email",
-                 TextColor = Color.Black
+                 TextColor = Color.FromHex("#9e9e9e"),
+                 FontSize = 16
              };
 
             _emailText = new Label
             {
                 Text = "@nederland-site.nl",
-                TextColor = Color.Black
+                TextColor = Color.White,
+                FontFamily = Device.OnPlatform(
+                    "Verela-Regular",
+                    "Verela-Regular.ttf",
+                    null
+                ),
+                WidthRequest = 30
+            };
+
+            _emailTextBack1 = new CustomBoxView
+            {
+                BackgroundColor = Color.White,
+                CornerRadius = 50,
+            };
+
+            _emailTextBack2 = new CustomBoxView
+            {
+                BackgroundColor = Color.FromHex("#eb3e12"),
+                CornerRadius = 50,
+            };
+
+            _emailBack = new CustomBoxView
+            {
+                BackgroundColor = Color.White,
+                CornerRadius = 50,
             };
 
             // wachtwoord veld aanmaken
             _passwordInput = new Entry
              {
-                 Placeholder = "Wachtwoord",
-                 TextColor = Color.Black,
-                 IsPassword = true
+                Placeholder = "Wachtwoord",
+                TextColor = Color.FromHex("#9e9e9e"),
+                IsPassword = true,
+                FontSize = 16
              };
 
-             // login knop aanmaken
-             _loginButton = new Button
+            _passBack = new CustomBoxView
+            {
+                BackgroundColor = Color.White,
+                CornerRadius = 50,
+            };
+
+            // login knop aanmaken
+            _loginButton = new Button
              {
                  Text = "Login",
                  VerticalOptions = LayoutOptions.EndAndExpand,
@@ -88,20 +129,46 @@ namespace nl_site
 
             _loginButton.Clicked += _loginButton_Clicked;
 
-            loginGrid.Children.Add(_emailInput, 1, 2);
-            loginGrid.Children.Add(_emailText, 4, 2);
-            loginGrid.Children.Add(_passwordInput, 1, 3);
-            loginGrid.Children.Add(_loginButton, 1, 5);
-            loginGrid.Children.Add(_register, 1, 6);
+            var layout = new AbsoluteLayout();
 
-            Grid.SetColumnSpan(_emailInput, 3);
-            Grid.SetColumnSpan(_emailText, 3);
-            Grid.SetColumnSpan(_passwordInput, 5);
-            Grid.SetColumnSpan(_loginButton, 5);
-            Grid.SetColumnSpan(_register, 5);
+            AbsoluteLayout.SetLayoutBounds(_logo, new Rectangle(.5, .03, .3, .3));
+            AbsoluteLayout.SetLayoutFlags(_logo, AbsoluteLayoutFlags.All);
 
-            // plaats content op de pagina
-            Content = loginGrid;
+            AbsoluteLayout.SetLayoutBounds(_background, new Rectangle(0, 0, 1, 1));
+            AbsoluteLayout.SetLayoutFlags(_background, AbsoluteLayoutFlags.All);
+
+            AbsoluteLayout.SetLayoutBounds(_emailInput, new Rectangle(.2, .4, .36, .06));
+            AbsoluteLayout.SetLayoutFlags(_emailInput, AbsoluteLayoutFlags.All);
+
+            AbsoluteLayout.SetLayoutBounds(_emailText, new Rectangle(1.04, .415, .4, .06));
+            AbsoluteLayout.SetLayoutFlags(_emailText, AbsoluteLayoutFlags.All);
+
+            AbsoluteLayout.SetLayoutBounds(_emailTextBack1, new Rectangle(.885, .4, .35, .075));
+            AbsoluteLayout.SetLayoutFlags(_emailTextBack1, AbsoluteLayoutFlags.All);
+
+            AbsoluteLayout.SetLayoutBounds(_emailTextBack2, new Rectangle(.8753, .402, .335, .065));
+            AbsoluteLayout.SetLayoutFlags(_emailTextBack2, AbsoluteLayoutFlags.All);
+
+            AbsoluteLayout.SetLayoutBounds(_emailBack, new Rectangle(.15, .4, .45, .075));
+            AbsoluteLayout.SetLayoutFlags(_emailBack, AbsoluteLayoutFlags.All);
+
+            AbsoluteLayout.SetLayoutBounds(_passwordInput, new Rectangle(.5, .525, .75, .06));
+            AbsoluteLayout.SetLayoutFlags(_passwordInput, AbsoluteLayoutFlags.All);
+
+            AbsoluteLayout.SetLayoutBounds(_passBack, new Rectangle(.5, .525, .84, .075));
+            AbsoluteLayout.SetLayoutFlags(_passBack, AbsoluteLayoutFlags.All);
+
+            layout.Children.Add(_background);
+            layout.Children.Add(_logo);
+            layout.Children.Add(_emailBack);
+            layout.Children.Add(_emailTextBack1);
+            layout.Children.Add(_emailTextBack2);
+            layout.Children.Add(_emailText);
+            layout.Children.Add(_emailInput);
+            layout.Children.Add(_passBack);
+            layout.Children.Add(_passwordInput);
+
+            Content = layout;
 
             var _register_tap = new TapGestureRecognizer();
             _register_tap.Tapped += async (s, e) =>

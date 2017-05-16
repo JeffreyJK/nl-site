@@ -14,6 +14,7 @@ namespace nl_site
 	{
         ICredentialsService storeService;
         private Group _groupInfo;
+        public ListView listView;
 
         public ChatListPage()
         {
@@ -32,12 +33,33 @@ namespace nl_site
 
             List<GroupList> d = JsonConvert.DeserializeObject<List<GroupList>>(App.Clijst);
 
-            var listView = new ListView();
+            var listView = new ListView {
+                HasUnevenRows = true,
+                RowHeight = 75,
+                IsPullToRefreshEnabled = true,
+            };
+
+            listView.Refreshing += OnRefresh;
+
             listView.ItemTemplate = new DataTemplate(typeof(CustomCell));
 
             listView.ItemsSource = d;
 
             Content = listView;
+        }
+
+        private async void OnRefresh(object sender, EventArgs e)
+        {
+            storeService = DependencyService.Get<ICredentialsService>();
+            string savedEmail = storeService.UserName;
+
+            ApiClient client = new ApiClient();
+            App.Clijst = await client.getGroup(savedEmail);
+
+            List<GroupList> d = JsonConvert.DeserializeObject<List<GroupList>>(App.Clijst);
+
+            //make sure to end the refresh state
+            listView.IsRefreshing = false;
         }
     }
 }

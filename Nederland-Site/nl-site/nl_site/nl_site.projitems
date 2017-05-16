@@ -15,9 +15,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)ApiClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CalendarPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ChatListPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CustomBoxView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CustomCell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HomePage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ICredentialsService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ImageCache.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LoginPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\ClientOutput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Group.cs" />
