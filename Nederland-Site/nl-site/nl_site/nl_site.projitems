@@ -9,31 +9,30 @@
     <Import_RootNamespace>nl_site</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ApiClient.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CalendarPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ChatListPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CustomBoxView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CustomButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CustomCell.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CustomSlider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FirstTimeLoginPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ForgotPasswordPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HomePage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ICredentialsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ImageCache.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LoginPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LogoutPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MenuItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MenuListView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MenuPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\ClientOutput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Group.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\GroupList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Login.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Register.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\UserInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ProfilePage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RegisterPage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TimelinePage.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
   </ItemGroup>
 </Project>

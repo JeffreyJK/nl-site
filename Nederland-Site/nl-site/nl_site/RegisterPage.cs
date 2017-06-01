@@ -17,11 +17,25 @@ namespace nl_site
         private Entry _lastInput;
         private Button _registerButton;
         private Label _login;
+   
+        private CustomBoxView _whiteBack1;
+        private CustomBoxView _whiteBack2;
+        private CustomBoxView _line;
+        private Image _logo;
+        private Image _background;
+        private Label _titleText;
+        private CustomBoxView _emailTextBack1;
+        private CustomBoxView _emailTextBack2;
+        private Label _back;
 
         bool disable = false;
 
         public RegisterPage ()
 		{
+            //BackgroundColor = Color.FromHex("#eb3e12");
+
+            NavigationPage.SetHasNavigationBar(this, false);
+
             var buttonStyle = new Style(typeof(Button))
             {
                 Setters = {
@@ -32,98 +46,238 @@ namespace nl_site
                 }
             };
 
-            // grid aanmaken
-            var registerGrid = new Grid { RowSpacing = 1, ColumnSpacing = 1 };
+            _logo = new Image
+            {
+                Source = "Icon.png",
+                WidthRequest = 175,
+                HeightRequest = 175,
+                MinimumHeightRequest = 175,
+                MinimumWidthRequest = 175,
+                VerticalOptions = LayoutOptions.End,
+                HorizontalOptions = LayoutOptions.End,
+                Aspect = Aspect.AspectFit
+            };
 
-            registerGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            registerGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            registerGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            registerGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            registerGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            registerGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            registerGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+            _background = new Image
+            {
+                Source = "background.png",
+                Aspect = Aspect.AspectFill
+            };
 
-            registerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            registerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            registerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            registerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            registerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            registerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            registerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-
-            // email veld aanmaken
             _emailInput = new Entry
             {
                 Placeholder = "Email",
-                TextColor = Color.Black
+                TextColor = Color.FromHex("#9e9e9e"),
+                FontSize = 15,
+                Margin = new Thickness(0, 0, 0, -5)
             };
 
             _emailText = new Label
             {
                 Text = "@nederland-site.nl",
+                TextColor = Color.White,
+                FontFamily = Device.OnPlatform(
+                    "VarelaRound-Regular",
+                    "VarelaRound-Regular.ttf#VarelaRound-Regular",
+                    null
+                ),
+                FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label))
+            };
+
+            _titleText = new Label
+            {
+                Text = "Nieuw account",
+                FontFamily = Device.OnPlatform(
+                    "Baloo-Regular",
+                    "Baloo-Regular.ttf#Baloo-Regular",
+                    null
+                ),
+                FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
+                TextColor = Color.White
             };
 
             // voornaam veld aanmaken
             _firstInput = new Entry
             {
                 Placeholder = "Voornaam",
-                TextColor = Color.Black
+                TextColor = Color.FromHex("#9e9e9e"),
+                FontSize = 15,
+                Margin = new Thickness(0, 0, 0, -5),
+                FontFamily = Device.OnPlatform(
+                    "VarelaRound-Regular",
+                    "VarelaRound-Regular.ttf#VarelaRound-Regular",
+                    null
+                )
             };
             
             // email veld aanmaken
             _lastInput = new Entry
             {
                 Placeholder = "Achternaam",
-                TextColor = Color.Black
+                TextColor = Color.FromHex("#9e9e9e"),
+                FontSize = 15,
+                Margin = new Thickness(0, 0, 0, -5),
+                FontFamily = Device.OnPlatform(
+                    "VarelaRound-Regular",
+                    "VarelaRound-Regular.ttf#VarelaRound-Regular",
+                    null
+                )
             };
 
             // register knop aanmaken
-            _registerButton = new Button
+            _registerButton = new CustomButton
             {
-                Text = "Maak aan",
+                Text = "Maak nieuw acount aan",
                 VerticalOptions = LayoutOptions.EndAndExpand,
-                Style = buttonStyle
+                BackgroundColor = Color.FromHex("00aaff"),
+                TextColor = Color.FromHex("fff"),
+                BorderRadius = 25,
+                FontFamily = Device.OnPlatform(
+                    "VarelaRound-Regular",
+                    "VarelaRound-Regular.ttf#VarelaRound-Regular",
+                    null
+                ),
+                FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Button))
             };
 
             _login = new Label
             {
                 Text = "Al een acount? Log dan in",
-                TextColor = Color.Black
+                TextColor = Color.Black,
+                FontFamily = Device.OnPlatform(
+                    "VarelaRound-Regular",
+                    "VarelaRound-Regular.ttf#VarelaRound-Regular",
+                    null
+                )
+            };
+
+            _whiteBack1 = new CustomBoxView
+            {
+                BackgroundColor = Color.White,
+                CornerRadius = 25,
+            };
+
+            _line = new CustomBoxView
+            {
+                BackgroundColor = Color.FromHex("#9e9e9e")
+            };
+
+            _whiteBack2 = new CustomBoxView
+            {
+                BackgroundColor = Color.White,
+                CornerRadius = 25,
+            };
+
+            _emailTextBack1 = new CustomBoxView
+            {
+                BackgroundColor = Color.FromHex("#eb3e12"),
+                CornerRadius = 0
+            };
+
+
+            _emailTextBack2 = new CustomBoxView
+            {
+                BackgroundColor = Color.FromHex("#eb3e12"),
+                CornerRadius = 25,
+            };
+
+            _back = new Label
+            {
+                Text = "Login",
+                TextColor = Color.White,
+                FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Button)),
+                FontFamily = Device.OnPlatform(
+                    "VarelaRound-Regular",
+                    "VarelaRound-Regular.ttf#VarelaRound-Regular",
+                    null
+                ),
             };
 
             _registerButton.Clicked += _registerButton_Clicked;
 
-            registerGrid.Children.Add(_emailInput, 1, 2);
-            registerGrid.Children.Add(_emailText, 4, 2);
-            registerGrid.Children.Add(_firstInput, 1, 3);
-            registerGrid.Children.Add(_lastInput, 4, 3);
-            registerGrid.Children.Add(_registerButton, 1, 5);
-            registerGrid.Children.Add(_login, 1, 6);
+            var layout = new AbsoluteLayout();
 
-            Grid.SetColumnSpan(_emailInput, 3);
-            Grid.SetColumnSpan(_emailText, 3);
-            Grid.SetColumnSpan(_firstInput, 2);
-            Grid.SetColumnSpan(_lastInput, 2);
-            Grid.SetColumnSpan(_registerButton, 5);
-            Grid.SetColumnSpan(_login, 5);
+            AbsoluteLayout.SetLayoutBounds(_logo, new Rectangle(.5, .03, .3, .3));
+            AbsoluteLayout.SetLayoutFlags(_logo, AbsoluteLayoutFlags.All);
 
-            // elementen plaatsen on de pagina
-            Content = registerGrid;
+            AbsoluteLayout.SetLayoutBounds(_background, new Rectangle(0, 0, 1, 1));
+            AbsoluteLayout.SetLayoutFlags(_background, AbsoluteLayoutFlags.All);
 
-            var _login_tap = new TapGestureRecognizer();
-            _login_tap.Tapped += async (s, e) =>
+            AbsoluteLayout.SetLayoutBounds(_whiteBack1, new Rectangle(.5, .45, .83, .075));
+            AbsoluteLayout.SetLayoutFlags(_whiteBack1, AbsoluteLayoutFlags.All);
+
+            AbsoluteLayout.SetLayoutBounds(_firstInput, new Rectangle(.2, .45, .35, .06));
+            AbsoluteLayout.SetLayoutFlags(_firstInput, AbsoluteLayoutFlags.All);
+
+            AbsoluteLayout.SetLayoutBounds(_lastInput, new Rectangle(.8, .45, .35, .06));
+            AbsoluteLayout.SetLayoutFlags(_lastInput, AbsoluteLayoutFlags.All);
+
+            AbsoluteLayout.SetLayoutBounds(_line, new Rectangle(.5, .45, .005, .065));
+            AbsoluteLayout.SetLayoutFlags(_line, AbsoluteLayoutFlags.All);
+
+            AbsoluteLayout.SetLayoutBounds(_whiteBack2, new Rectangle(.5, .565, .83, .075));
+            AbsoluteLayout.SetLayoutFlags(_whiteBack2, AbsoluteLayoutFlags.All);
+
+            AbsoluteLayout.SetLayoutBounds(_emailInput, new Rectangle(.212, .563, .38, .06));
+            AbsoluteLayout.SetLayoutFlags(_emailInput, AbsoluteLayoutFlags.All);
+
+            AbsoluteLayout.SetLayoutBounds(_emailTextBack1, new Rectangle(.58, .565, .1, .0695));
+            AbsoluteLayout.SetLayoutFlags(_emailTextBack1, AbsoluteLayoutFlags.All);
+
+            AbsoluteLayout.SetLayoutBounds(_emailTextBack2, new Rectangle(.86, .565, .35, .0695));
+            AbsoluteLayout.SetLayoutFlags(_emailTextBack2, AbsoluteLayoutFlags.All);
+
+            AbsoluteLayout.SetLayoutBounds(_registerButton, new Rectangle(.5, .7, .83, .07));
+            AbsoluteLayout.SetLayoutFlags(_registerButton, AbsoluteLayoutFlags.All);
+
+            AbsoluteLayout.SetLayoutBounds(_back, new Rectangle(.5, .88, .175, .1));
+            AbsoluteLayout.SetLayoutFlags(_back, AbsoluteLayoutFlags.All);
+
+#if __IOS__
+            AbsoluteLayout.SetLayoutBounds(_titleText, new Rectangle(.5, .35, .28, .1));
+            AbsoluteLayout.SetLayoutFlags(_titleText, AbsoluteLayoutFlags.All);
+
+            AbsoluteLayout.SetLayoutBounds(_emailText, new Rectangle(.91, .58, .4, .06));
+            AbsoluteLayout.SetLayoutFlags(_emailText, AbsoluteLayoutFlags.All);
+#endif
+#if __ANDROID__
+            AbsoluteLayout.SetLayoutBounds(_titleText, new Rectangle(.5, .35, .35, .1));
+            AbsoluteLayout.SetLayoutFlags(_titleText, AbsoluteLayoutFlags.All);
+
+            AbsoluteLayout.SetLayoutBounds(_emailText, new Rectangle(.91, .575, .4, .06));
+            AbsoluteLayout.SetLayoutFlags(_emailText, AbsoluteLayoutFlags.All);
+#endif
+
+            layout.Children.Add(_background);
+            layout.Children.Add(_logo);
+            layout.Children.Add(_titleText);
+            layout.Children.Add(_whiteBack1);
+            layout.Children.Add(_firstInput);
+            layout.Children.Add(_lastInput);
+            layout.Children.Add(_line);
+            layout.Children.Add(_whiteBack2);
+            layout.Children.Add(_emailInput);
+            layout.Children.Add(_emailTextBack1);
+            layout.Children.Add(_emailTextBack2);
+            layout.Children.Add(_emailText);
+            layout.Children.Add(_registerButton);
+            layout.Children.Add(_back);
+
+            Content = layout;
+
+            var _back_tap = new TapGestureRecognizer();
+            _back_tap.Tapped += async (s, e) =>
             {
                 if (disable)
                     return;
 
                 disable = true;
 
-                Navigation.InsertPageBefore(new LoginPage(), this);
-                await Navigation.PopAsync();
+                Navigation.PushModalAsync(new LoginPage());
 
                 disable = false;
             };
-            _login.GestureRecognizers.Add(_login_tap);
+            _back.GestureRecognizers.Add(_back_tap);
         }
 
         string emailRegex = @"^[a-z0-9]+[_a-z0-9\.-]*[a-z0-9]";
@@ -159,13 +313,12 @@ namespace nl_site
             if (errorMsg.Count() == 0)
             {
                 // register
-                string completeEmail = _emailInput.Text + _emailText.Text;
+                string completeEmail = _emailInput.Text.Trim() + _emailText.Text;
                 ApiClient client = new ApiClient();
-                ClientOutput output = await client.registerData(completeEmail, _firstInput.Text, _lastInput.Text);
+                ClientOutput output = await client.registerData(completeEmail, _firstInput.Text.Trim(), _lastInput.Text.Trim());
                 if (output.errorCode == 0)
                 {
-                    Navigation.InsertPageBefore(new LoginPage(), this);
-                    await Navigation.PopAsync();
+                    Navigation.PushModalAsync(new LoginPage());
                 }
                 else
                 {

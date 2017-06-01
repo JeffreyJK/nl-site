@@ -20,6 +20,8 @@ namespace nl_site
         {
             Title = "Chat";
 
+            
+
             getGroup();
         }
 
@@ -44,7 +46,8 @@ namespace nl_site
             listView.ItemTemplate = new DataTemplate(typeof(CustomCell));
 
             listView.ItemsSource = d;
-
+            
+            Title = "Chat";
             Content = listView;
         }
 

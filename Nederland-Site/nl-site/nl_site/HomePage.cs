@@ -7,25 +7,24 @@ using Xamarin.Forms;
 
 namespace nl_site
 {
-	public class HomePage : TabbedPage
+	public class HomePage : MasterDetailPage
 	{
 		public HomePage ()
 		{
-            var toolbarItem = new ToolbarItem
-            {
-                Text = "Logout"
-            };
+            var menuPage = new MenuPage();
+            menuPage.Menu.ItemSelected += (sender, e) => NavigateToPage(e.SelectedItem as MenuItem);
+            Master = menuPage;
+            Detail = new NavigationPage(new ChatListPage());
 
-            toolbarItem.Clicked += OnLogoutButtonClicked;
-            ToolbarItems.Add(toolbarItem);
+        }
 
-            Title = "Nederland-Site";
-            
-            var navigationPage = new NavigationPage();
+        void NavigateToPage(MenuItem menu)
+        {
+            Page displayPage = (Page)Activator.CreateInstance(menu.TargetType);
 
-            Children.Add(new ChatListPage());
-            Children.Add(new CalendarPage());
-            Children.Add(new TimelinePage());
+            Detail = new NavigationPage(displayPage);
+
+            IsPresented = false;
         }
 
         async void OnLogoutButtonClicked(object sender, EventArgs e)

@@ -7,7 +7,10 @@ using Foundation;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
+using nl_site;
+using nl_site.iOS;
 
+[assembly: ExportRenderer(typeof(CustomBoxView), typeof(CustomBoxViewRenderer))]
 namespace nl_site.iOS
 {
     class CustomBoxViewRenderer : VisualElementRenderer<BoxView>
