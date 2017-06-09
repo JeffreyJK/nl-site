@@ -64,12 +64,6 @@ namespace nl_site
 
             #region Design
 
-            /*_background = new Image
-            {
-                Source = "background.png",
-                Aspect = Aspect.AspectFill
-            };*/
-
             _title = new Label
             {
                 Text = "Gegevens",
@@ -87,7 +81,7 @@ namespace nl_site
                 VerticalOptions = LayoutOptions.EndAndExpand,
                 BackgroundColor = Color.Transparent,
                 TextColor = Color.FromHex("fff"),
-                BorderRadius = 25,
+                BorderRadius = 20,
                 HeightRequest = 110,
                 WidthRequest = 110,
             };
@@ -97,13 +91,13 @@ namespace nl_site
                 Source = "temp.png",
                 HeightRequest = 155,
                 WidthRequest = 155,
-                Aspect = Aspect.AspectFill,
+                Aspect = Aspect.AspectFill
             };
 
             _back1 = new CustomBoxView
             {
                 BackgroundColor = Color.White,
-                CornerRadius = 25,
+                CornerRadius = 20,
             };
 
             _firstName = new Entry
@@ -122,7 +116,7 @@ namespace nl_site
             _back2 = new CustomBoxView
             {
                 BackgroundColor = Color.White,
-                CornerRadius = 25,
+                CornerRadius = 20,
             };
 
             _lastName = new Entry
@@ -141,7 +135,7 @@ namespace nl_site
             _back3 = new CustomBoxView
             {
                 BackgroundColor = Color.White,
-                CornerRadius = 25,
+                CornerRadius = 20,
             };
 
             _date = new DatePicker
@@ -153,7 +147,7 @@ namespace nl_site
             _back4 = new CustomBoxView
             {
                 BackgroundColor = Color.White,
-                CornerRadius = 25,
+                CornerRadius = 20,
             };
 
             _picker = new Picker
@@ -165,7 +159,7 @@ namespace nl_site
             _back5 = new CustomBoxView
             {
                 BackgroundColor = Color.White,
-                CornerRadius = 25,
+                CornerRadius = 15,
             };
 
             _color = new Label
@@ -186,14 +180,14 @@ namespace nl_site
                 Maximum = 3,
                 StepValue = 1,
                 BackgroundColor = Color.FromHex("f9b49d"),
-                CornerRadius = 25,
+                CornerRadius = 20,
                 HeightRequest = 25
             };
 
             _back6 = new CustomBoxView
             {
                 BackgroundColor = Color.White,
-                CornerRadius = 25,
+                CornerRadius = 20,
             };
 
             _status = new Entry
@@ -212,7 +206,7 @@ namespace nl_site
             _back7 = new CustomBoxView
             {
                 BackgroundColor = Color.White,
-                CornerRadius = 25,
+                CornerRadius = 20,
             };
 
             _picker2 = new Picker
@@ -224,37 +218,37 @@ namespace nl_site
             _back8 = new CustomBoxView
             {
                 BackgroundColor = Color.White,
-                CornerRadius = 25,
+                CornerRadius = 20,
             };
 
             _back9 = new CustomBoxView
             {
                 BackgroundColor = Color.White,
-                CornerRadius = 25,
+                CornerRadius = 20,
             };
 
             _back10 = new CustomBoxView
             {
                 BackgroundColor = Color.White,
-                CornerRadius = 25,
+                CornerRadius = 20,
             };
 
             _back11 = new CustomBoxView
             {
                 BackgroundColor = Color.White,
-                CornerRadius = 25,
+                CornerRadius = 20,
             };
 
             _back12 = new CustomBoxView
             {
                 BackgroundColor = Color.White,
-                CornerRadius = 25,
+                CornerRadius = 20,
             };
 
             _back13 = new CustomBoxView
             {
                 BackgroundColor = Color.White,
-                CornerRadius = 25,
+                CornerRadius = 20,
             };
 
             _editButton = new CustomButton
@@ -263,7 +257,7 @@ namespace nl_site
                 VerticalOptions = LayoutOptions.EndAndExpand,
                 BackgroundColor = Color.FromHex("00aaff"),
                 TextColor = Color.FromHex("fff"),
-                BorderRadius = 25,
+                BorderRadius = 20,
                 FontFamily = Device.OnPlatform(
                     "VarelaRound-Regular",
                     "VarelaRound-Regular.ttf#VarelaRound-Regular",
@@ -305,11 +299,11 @@ namespace nl_site
             #region Absolute layout
             var layout = new AbsoluteLayout { };
 
-            var layout3 = new AbsoluteLayout { };
-
             var layout4 = new AbsoluteLayout { };
 
 #if __IOS__
+            var layout3 = new AbsoluteLayout { HeightRequest = 400 };
+
             AbsoluteLayout.SetLayoutBounds(_title, new Rectangle(.5, .05, .23, .2));
             AbsoluteLayout.SetLayoutFlags(_title, AbsoluteLayoutFlags.All);
 
@@ -337,55 +331,83 @@ namespace nl_site
             AbsoluteLayout.SetLayoutBounds(_date, new Rectangle(.5, .6, .75, .075));
             AbsoluteLayout.SetLayoutFlags(_date, AbsoluteLayoutFlags.All);
 
-            AbsoluteLayout.SetLayoutBounds(_back4, new Rectangle(.5, .6, .83, .065));
+            AbsoluteLayout.SetLayoutBounds(_back4, new Rectangle(.5, .7, .83, .08));
             AbsoluteLayout.SetLayoutFlags(_back4, AbsoluteLayoutFlags.All);
 
-            AbsoluteLayout.SetLayoutBounds(_picker, new Rectangle(.5, .61, .75, .075));
+            AbsoluteLayout.SetLayoutBounds(_picker, new Rectangle(.5, .7, .75, .075));
             AbsoluteLayout.SetLayoutFlags(_picker, AbsoluteLayoutFlags.All);
 
-            AbsoluteLayout.SetLayoutBounds(_back5, new Rectangle(.5, .71, .83, .04));
+            AbsoluteLayout.SetLayoutBounds(_back5, new Rectangle(.5, .85, .83, .06));
             AbsoluteLayout.SetLayoutFlags(_back5, AbsoluteLayoutFlags.All);
 
-            AbsoluteLayout.SetLayoutBounds(_color, new Rectangle(.11, .665, .2, .04));
+            AbsoluteLayout.SetLayoutBounds(_color, new Rectangle(.11, .79, .2, .04));
             AbsoluteLayout.SetLayoutFlags(_color, AbsoluteLayoutFlags.All);
 
-            AbsoluteLayout.SetLayoutBounds(_slider, new Rectangle(.5, .71, .77, .04));
+            AbsoluteLayout.SetLayoutBounds(_slider, new Rectangle(.5, .85, .75, .06));
             AbsoluteLayout.SetLayoutFlags(_slider, AbsoluteLayoutFlags.All);
 
-            AbsoluteLayout.SetLayoutBounds(_back6, new Rectangle(.5, .81, .83, .065));
+            AbsoluteLayout.SetLayoutBounds(_back6, new Rectangle(.5, 1, .83, .075));
             AbsoluteLayout.SetLayoutFlags(_back6, AbsoluteLayoutFlags.All);
 
-            AbsoluteLayout.SetLayoutBounds(_status, new Rectangle(.3, .81, .6, .064));
+            AbsoluteLayout.SetLayoutBounds(_status, new Rectangle(.3, .99, .6, .065));
             AbsoluteLayout.SetLayoutFlags(_status, AbsoluteLayoutFlags.All);
 
-            AbsoluteLayout.SetLayoutBounds(_back7, new Rectangle(.5, .89, .83, .065));
+            AbsoluteLayout.SetLayoutBounds(_back7, new Rectangle(.5, 0, .83, .1));
             AbsoluteLayout.SetLayoutFlags(_back7, AbsoluteLayoutFlags.All);
 
-            AbsoluteLayout.SetLayoutBounds(_picker2, new Rectangle(.5, .9, .75, .075));
+            AbsoluteLayout.SetLayoutBounds(_picker2, new Rectangle(.5, 0, .75, .1));
             AbsoluteLayout.SetLayoutFlags(_picker2, AbsoluteLayoutFlags.All);
 
-            AbsoluteLayout.SetLayoutBounds(_back8, new Rectangle(.5, 1, .83, .065));
+            AbsoluteLayout.SetLayoutBounds(_back8, new Rectangle(.5, 0.12, .83, .1));
             AbsoluteLayout.SetLayoutFlags(_back8, AbsoluteLayoutFlags.All);
 
-            AbsoluteLayout.SetLayoutBounds(_back9, new Rectangle(.5, .0, .83, .2));
+            AbsoluteLayout.SetLayoutBounds(_back9, new Rectangle(.5, .2, .83, .1));
             AbsoluteLayout.SetLayoutFlags(_back9, AbsoluteLayoutFlags.All);
 
-            AbsoluteLayout.SetLayoutBounds(_back10, new Rectangle(.5, .3, .83, .2));
+            AbsoluteLayout.SetLayoutBounds(_back10, new Rectangle(.5, .28, .83, .1));
             AbsoluteLayout.SetLayoutFlags(_back10, AbsoluteLayoutFlags.All);
 
-            AbsoluteLayout.SetLayoutBounds(_back11, new Rectangle(.5, .6, .83, .2));
+            AbsoluteLayout.SetLayoutBounds(_back11, new Rectangle(.5, .36, .83, .065));
             AbsoluteLayout.SetLayoutFlags(_back11, AbsoluteLayoutFlags.All);
 
-            AbsoluteLayout.SetLayoutBounds(_back12, new Rectangle(.5, 1, .83, .2));
+            AbsoluteLayout.SetLayoutBounds(_back12, new Rectangle(.5, .5, .83, .065));
             AbsoluteLayout.SetLayoutFlags(_back12, AbsoluteLayoutFlags.All);
 
-            AbsoluteLayout.SetLayoutBounds(_back13, new Rectangle(.5, 0, .83, .2));
+            AbsoluteLayout.SetLayoutBounds(_back13, new Rectangle(.5, .58, .83, .065));
             AbsoluteLayout.SetLayoutFlags(_back13, AbsoluteLayoutFlags.All);
 
-            AbsoluteLayout.SetLayoutBounds(_editButton, new Rectangle(.5, .5, .83, .2));
+            AbsoluteLayout.SetLayoutBounds(_editButton, new Rectangle(.5, .7, .83, .065));
             AbsoluteLayout.SetLayoutFlags(_editButton, AbsoluteLayoutFlags.All);
+
+            layout.Children.Add(_title);
+            layout.Children.Add(_image);
+            layout.Children.Add(_imageBtn);
+            layout.Children.Add(_back1);
+            layout.Children.Add(_firstName);
+            layout.Children.Add(_back2);
+            layout.Children.Add(_lastName);
+            layout.Children.Add(_back3);
+            layout.Children.Add(_date);
+            layout.Children.Add(_back4);
+            layout.Children.Add(_picker);
+            layout.Children.Add(_back5);
+            layout.Children.Add(_color);
+            layout.Children.Add(_slider);
+            layout.Children.Add(_back6);
+            layout.Children.Add(_status);
+            layout3.Children.Add(_back7);
+            layout3.Children.Add(_picker2);
+            layout3.Children.Add(_back8);
+            layout3.Children.Add(_back9);
+            layout3.Children.Add(_back10);
+            layout3.Children.Add(_back11);
+            layout3.Children.Add(_back12);
+            layout3.Children.Add(_back13);
+            layout3.Children.Add(_editButton);
 #endif
 #if __ANDROID__
+             var layout3 = new AbsoluteLayout { };
+
             AbsoluteLayout.SetLayoutBounds(_title, new Rectangle(.5, .05, .23, .2));
             AbsoluteLayout.SetLayoutFlags(_title, AbsoluteLayoutFlags.All);
 
@@ -460,7 +482,7 @@ namespace nl_site
 
             AbsoluteLayout.SetLayoutBounds(_editButton, new Rectangle(.5, .5, .83, .2));
             AbsoluteLayout.SetLayoutFlags(_editButton, AbsoluteLayoutFlags.All);
-#endif
+
             layout.Children.Add(_title);
             layout.Children.Add(_image);
             layout.Children.Add(_imageBtn);
@@ -470,7 +492,7 @@ namespace nl_site
             layout.Children.Add(_lastName);
             layout.Children.Add(_back3);
             layout.Children.Add(_date);
-            /*layout.Children.Add(_back4);
+            layout.Children.Add(_back4);
             layout.Children.Add(_picker);
             layout.Children.Add(_back5);
             layout.Children.Add(_color);
@@ -485,7 +507,8 @@ namespace nl_site
             layout3.Children.Add(_back11);
             layout3.Children.Add(_back12);
             layout4.Children.Add(_back13);
-            layout4.Children.Add(_editButton);*/
+            layout4.Children.Add(_editButton);
+#endif
 
             StackLayout layout2 = new StackLayout()
             {
